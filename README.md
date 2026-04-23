@@ -194,13 +194,55 @@ the pyannote API rename.
 
 ---
 
-## Privacy note
+## Privacy & data flow
 
-Nothing you transcribe is ever uploaded. Models are fetched from Hugging Face
-once at install time, but the audio itself is processed entirely on your
-device. The only outbound traffic during normal runs is for anonymous
-authenticity checks against the Hugging Face Hub when a model hasn't been
-cached yet.
+Exactly what leaves your machine depends on **how** you invoke the tool.
+Read this section before transcribing sensitive content.
+
+### Using the CLI or desktop app directly (standalone)
+
+| Data | Where it goes | Leaves your machine? |
+|---|---|---|
+| Audio / video file | Processed in memory on your Mac | **No — never uploaded** |
+| Transcript (`.txt`) | Written to local disk | **No — never uploaded** |
+| Video frames | Not read at all; only the audio track is extracted | **No — not processed** |
+| Whisper / pyannote model weights | Downloaded once from Hugging Face, then cached under `~/.cache/huggingface/` and used offline | Download metadata yes; content no |
+| What Hugging Face sees | Your IP + token + which model files you requested | **Never your audio or transcript** |
+
+In standalone mode the Hub only knows *"this token downloaded these model
+files"*. It has no idea what you transcribed.
+
+### Using it through the Claude Skill
+
+Still runs locally — but there is an extra path to be aware of:
+
+- The transcription script writes a `.txt` on disk, same as before.
+- It also prints each segment to **stdout** (Whisper's `verbose=True` default).
+- When Claude Code invokes the skill, its Bash tool captures that stdout.
+- Captured stdout becomes part of the conversation → it is sent to
+  Anthropic's servers as normal conversation context.
+
+In other words: the *file* on disk stays local, but anything Claude reads
+back from the tool while helping you (for summarisation, translation,
+follow-up, etc.) flows through Anthropic like any other Claude conversation.
+
+If you want the strongest privacy — e.g. legal depositions, medical
+recordings, anything you wouldn't paste into a chat with any AI — **run the
+CLI in a plain terminal rather than through the skill.**
+
+### Recording other people
+
+The tool is agnostic about what you feed it, but please note:
+
+- In the UK, EU (GDPR), California, and many other jurisdictions, recording
+  a conversation without the other party's knowledge and/or consent can be
+  **illegal** — even if you're a participant.
+- Even where recording is legal, running the recording through AI analysis
+  often requires a **separate disclosure** to the other party under
+  applicable data-protection rules.
+- This is a property of the **recording**, not the tool — but it applies
+  equally whether you use this project, a cloud service, or a human
+  typist.
 
 ---
 
