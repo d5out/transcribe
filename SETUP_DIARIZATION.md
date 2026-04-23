@@ -50,11 +50,14 @@ shared document.** Treat it like a password.
 
 ## Step 3 — Accept the two model licenses
 
-Open each of these two pages and click **"Agree and access repository"** once
-per page (you need to be signed in):
+Open each of these pages and click **"Agree and access repository"** once per
+page (you need to be signed in):
 
 - https://huggingface.co/pyannote/speaker-diarization-3.1
 - https://huggingface.co/pyannote/segmentation-3.0
+- https://huggingface.co/pyannote/speaker-diarization-community-1 *(required on
+  pyannote.audio 4.x — the 3.1 pipeline transitively loads components from
+  this repository)*
 
 Without this step, the token is valid but cannot download the models.
 
@@ -184,6 +187,11 @@ pages. Repeat Step 3.
 **`403 Client Error: Forbidden`**
 Token lacks permission for gated repos. Recreate the token and make sure the
 "Read access to public gated repos" scope is enabled.
+
+**`Cannot access gated repo ... speaker-diarization-community-1`**
+This is the third model pyannote 4.x pulls in behind the scenes. Go to
+https://huggingface.co/pyannote/speaker-diarization-community-1 and click
+**Agree and access repository**, then re-run.
 
 **`Symbol not found: _torch_library_impl`**
 `torch` and `torchaudio` versions are mismatched. Reinstall both together:

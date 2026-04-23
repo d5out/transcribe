@@ -5,6 +5,11 @@
 Transcribe meetings, interviews, voice notes, and podcasts straight on your Mac.
 No cloud, no uploads, no per-minute fees. Your audio never leaves your machine.
 
+> 🤖 **Also works as a Claude Skill** — if you use Claude Code, you can ask
+> Claude to transcribe files conversationally (*"transcribe this recording
+> and summarise it"*) and it will invoke this tool under the hood. See
+> **[§ Use as a Claude Skill](#use-as-a-claude-skill)** below.
+
 ---
 
 ## Features
@@ -86,6 +91,47 @@ Run in an interactive terminal and you'll get an optional prompt to rename
 > 💡 **Tip for figuring out who is who**: when people greet each other at
 > the start — e.g. someone says *"Hi Alice"* — that person is **not** Alice;
 > Alice is whoever is being greeted (usually the next speaker).
+
+---
+
+## Use as a Claude Skill
+
+If you have [Claude Code](https://www.anthropic.com/claude-code), this repo
+doubles as a **Claude Skill**. Install it once and Claude will invoke the
+transcription tool for you whenever you ask in natural language.
+
+### Install the skill
+
+**Option A — link this repo's bundled skill (stays in sync with `git pull`):**
+
+```bash
+# From inside this cloned repo:
+mkdir -p ~/.claude/skills
+ln -s "$(pwd)/.claude/skills/transcribe" ~/.claude/skills/transcribe
+```
+
+**Option B — copy it:**
+
+```bash
+mkdir -p ~/.claude/skills
+cp -r .claude/skills/transcribe ~/.claude/skills/transcribe
+```
+
+### Then just ask Claude
+
+Once the skill is installed (and your Python deps from `requirements.txt` are
+in place), open Claude Code and say things like:
+
+- *"Transcribe `/path/to/meeting.m4a` with the large model."*
+- *"Transcribe this recording, there are 3 speakers, then summarise it."*
+- *"Who said what in `interview.mp3`? Save a labelled transcript."*
+
+Claude reads **[`.claude/skills/transcribe/SKILL.md`](.claude/skills/transcribe/SKILL.md)**
+to decide when to use the skill and how to call `transcribe.py`. It handles
+pre-flight dependency checks, picks the right flags, and after the run it
+can chain into summaries, translation, note-taking, etc.
+
+The skill respects the same privacy guarantee as the CLI: audio stays local.
 
 ---
 
