@@ -1,0 +1,100 @@
+================================================================================
+                        AUDIO TO TEXT TRANSCRIPTION TOOL
+                              使用说明 / How to Use
+================================================================================
+
+ENGLISH
+-------
+
+This tool converts audio files (m4a, mp3, wav, etc.) to text using AI.
+It runs 100% locally on your Mac - your files never leave your computer.
+
+SETUP (first time only):
+  pip install -r requirements.txt
+
+BASIC USAGE:
+
+  1. With file path:
+     python3 transcribe.py /path/to/your/audio.m4a
+
+  2. Without file path (will prompt you):
+     python3 transcribe.py
+
+  3. Multiple files:
+     python3 transcribe.py file1.mp3 file2.m4a
+
+  4. Entire folder:
+     python3 transcribe.py /path/to/audio_folder/
+
+MODEL OPTIONS:
+
+  -m small    Fast, good accuracy (default)
+  -m medium   Slower, better accuracy
+  -m large    Slowest, best accuracy
+
+  Example: python3 transcribe.py audio.m4a -m medium
+
+OTHER OPTIONS:
+
+  -o /path/   Save transcripts to specific folder
+  -l french   Force a specific language (auto-detects by default)
+
+  Example: python3 transcribe.py audio.m4a -o ~/Desktop/ -l english
+
+OUTPUT:
+  The transcript is saved as a .txt file in the same folder as your audio.
+
+
+================================================================================
+
+中文
+----
+
+此工具使用 AI 将音频文件（m4a、mp3、wav 等）转换为文字。
+100% 在本地 Mac 上运行 - 您的文件不会离开您的电脑。
+
+安装（仅首次需要）：
+  pip install -r requirements.txt
+
+基本用法：
+
+  1. 带文件路径：
+     python3 transcribe.py /你的音频文件路径/audio.m4a
+
+  2. 不带文件路径（会提示你输入）：
+     python3 transcribe.py
+
+  3. 多个文件：
+     python3 transcribe.py file1.mp3 file2.m4a
+
+  4. 整个文件夹：
+     python3 transcribe.py /音频文件夹路径/
+
+模型选项：
+
+  -m small    快速，准确度良好（默认）
+  -m medium   较慢，准确度更高
+  -m large    最慢，准确度最高
+
+  示例：python3 transcribe.py audio.m4a -m medium
+
+其他选项：
+
+  -o /路径/   将转录文本保存到指定文件夹
+  -l chinese  强制指定语言（默认自动检测）
+
+  示例：python3 transcribe.py audio.m4a -o ~/Desktop/ -l chinese
+
+输出：
+  转录文本将保存为 .txt 文件，与音频文件在同一文件夹中。
+
+================================================================================
+
+SUPPORTED FORMATS / 支持的格式:
+  m4a, mp3, wav, flac, ogg, webm
+
+SUPPORTED LANGUAGES / 支持的语言:
+  99+ languages including / 支持99+种语言，包括：
+  English, Chinese, Spanish, French, German, Japanese, Korean, etc.
+
+================================================================================

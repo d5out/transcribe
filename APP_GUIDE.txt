@@ -1,0 +1,111 @@
+================================================================================
+                         TRANSCRIBE — DESKTOP APP GUIDE
+                              桌面应用使用指南
+================================================================================
+
+ENGLISH
+-------
+
+A local AI transcription app that runs entirely on your Mac.
+No internet needed. Your files never leave your computer.
+
+SETUP (first time only):
+  pip install -r requirements.txt
+  pip install pywebview
+
+START THE APP:
+  python3 app.py
+  A native window will open — no browser or server needed.
+
+HOW TO USE:
+
+  1. SELECT FILES
+     Click the selection area to open the native file picker.
+     You can select one or multiple audio files at once.
+
+  2. CHOOSE QUALITY
+     Five model options, from fastest to best:
+       Tiny   — fastest, lowest accuracy (good for quick drafts)
+       Base   — faster, lower accuracy
+       Small  — fast, good accuracy
+       Medium — balanced speed and accuracy
+       Large  — best accuracy, slowest (default, recommended)
+
+  3. RENAME (optional)
+     When transcribing a single file, you can type a custom name
+     in the Rename field. The output .txt will use this name.
+     Leave blank to keep the original filename.
+
+  4. SAVE LOCATION (optional)
+     By default, the .txt is saved next to the original audio file.
+     Click "Choose folder" to pick a different output directory.
+     Click "Reset" to go back to default behavior.
+
+  5. CLICK "TRANSCRIBE"
+     Progress is shown in real time. When done:
+       - The text appears in the result card
+       - A .txt file is auto-saved
+       - Click "Copy text" to copy to clipboard
+
+SUPPORTED FORMATS:
+  m4a, mp3, wav, flac, ogg, webm
+
+SUPPORTED LANGUAGES:
+  99+ languages — auto-detected. Includes:
+  English, Chinese, Spanish, French, German, Japanese, Korean, etc.
+
+
+================================================================================
+
+中文
+----
+
+一个完全在本地 Mac 上运行的 AI 转录应用。
+无需联网，文件不会离开你的电脑。
+
+安装（仅首次需要）：
+  pip install -r requirements.txt
+  pip install pywebview
+
+启动应用：
+  python3 app.py
+  会弹出原生窗口，无需浏览器或服务器。
+
+使用步骤：
+
+  1. 选择文件
+     点击选择区域，打开系统文件选择器。
+     可以一次选择一个或多个音频文件。
+
+  2. 选择质量
+     五种模型选项，从最快到最佳：
+       Tiny   — 最快，准确度最低（适合快速草稿）
+       Base   — 较快，准确度较低
+       Small  — 快速，准确度良好
+       Medium — 速度与准确度平衡
+       Large  — 准确度最高，最慢（默认，推荐）
+
+  3. 重命名（可选）
+     转录单个文件时，可以在"Rename"栏输入自定义名称。
+     输出的 .txt 文件将使用该名称。
+     留空则保持原文件名。
+
+  4. 保存位置（可选）
+     默认保存在原音频文件旁边。
+     点击 "Choose folder" 选择其他输出目录。
+     点击 "Reset" 恢复默认。
+
+  5. 点击 "Transcribe"
+     进度实时显示。完成后：
+       - 文本显示在结果卡片中
+       - .txt 文件自动保存
+       - 点击 "Copy text" 复制到剪贴板
+
+支持格式：
+  m4a, mp3, wav, flac, ogg, webm
+
+支持语言：
+  99+ 种语言，自动检测。包括：
+  中文、英文、西班牙语、法语、德语、日语、韩语等。
+
+================================================================================
