@@ -44,7 +44,8 @@ def run_diarization(
         from pyannote.audio import Pipeline
     except ImportError:
         print("Error: pyannote.audio is not installed.")
-        print("Install with: pip install pyannote.audio")
+        print("Install optional diarization dependencies with:")
+        print("  pip install -r requirements-diarize.txt")
         sys.exit(1)
 
     print("  Running speaker diarization (pyannote)...")

@@ -30,6 +30,7 @@ env/
 !APP_GUIDE.txt
 !HOW_TO_USE.txt
 !requirements.txt
+!requirements-diarize.txt
 
 # Secrets
 .env

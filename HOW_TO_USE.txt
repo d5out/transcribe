@@ -12,6 +12,12 @@ It runs 100% locally on your Mac - your files never leave your computer.
 SETUP (first time only):
   pip install -r requirements.txt
 
+OPTIONAL: speaker diarization (label who said what)
+  pip install -r requirements-diarize.txt
+  Then follow the full step-by-step guide in SETUP_DIARIZATION.md
+  (covers HuggingFace token, model-term acceptance, secure storage,
+  and troubleshooting).
+
 BASIC USAGE:
 
   1. With file path:
@@ -55,6 +61,11 @@ OUTPUT:
 
 安装（仅首次需要）：
   pip install -r requirements.txt
+
+可选：说话人分离（标记谁说了什么）
+  pip install -r requirements-diarize.txt
+  然后按照 SETUP_DIARIZATION.md 里的分步指南配置
+  （包含 HuggingFace token、模型条款同意、安全存储方式、常见问题排查）。
 
 基本用法：
 

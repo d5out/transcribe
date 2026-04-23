@@ -1,0 +1,13 @@
+# Optional dependencies for speaker diarization (--diarize flag)
+# Install only if you want to label who said what:
+#   pip install -r requirements-diarize.txt
+#
+# You also need a free HuggingFace account and token:
+#   https://huggingface.co/settings/tokens
+# And must accept the terms for these two models (one click each):
+#   https://huggingface.co/pyannote/speaker-diarization-3.1
+#   https://huggingface.co/pyannote/segmentation-3.0
+
+pyannote.audio
+torch
+torchaudio
