@@ -192,6 +192,18 @@ Token lacks permission for gated repos. Recreate the token and make sure the
 pip install --upgrade torch torchaudio
 ```
 
+**`Pipeline.from_pretrained() got an unexpected keyword argument 'use_auth_token'`**
+You are on pyannote.audio 4.x, which renamed `use_auth_token` to `token`. The
+bundled `transcribe.py` detects this automatically and falls back gracefully,
+so you only see this if you've modified the code by hand or are calling
+pyannote directly. Change `use_auth_token=...` to `token=...`.
+
+**`Pipeline.from_pretrained() got an unexpected keyword argument 'token'`**
+The opposite problem — you are on pyannote.audio < 4.0 where the argument was
+still called `use_auth_token`. The bundled script handles this fallback
+automatically. If you're calling pyannote directly, use `use_auth_token=...`,
+or upgrade pyannote with `pip install --upgrade pyannote.audio`.
+
 **Diarization is slow or inaccurate**
 
 - Use `--speakers N` if you know the exact number of speakers.

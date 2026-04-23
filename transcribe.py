@@ -49,7 +49,11 @@ def run_diarization(
         sys.exit(1)
 
     print("  Running speaker diarization (pyannote)...")
-    pipeline = Pipeline.from_pretrained(DIARIZATION_MODEL, use_auth_token=hf_token)
+    try:
+        pipeline = Pipeline.from_pretrained(DIARIZATION_MODEL, token=hf_token)
+    except TypeError:
+        # Older pyannote.audio (< 4.0) used use_auth_token
+        pipeline = Pipeline.from_pretrained(DIARIZATION_MODEL, use_auth_token=hf_token)
 
     try:
         import torch
