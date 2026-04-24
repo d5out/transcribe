@@ -70,10 +70,20 @@ def run_diarization(
             kwargs["min_speakers"] = min_speakers
         if max_speakers is not None:
             kwargs["max_speakers"] = max_speakers
-    diarization = pipeline(str(audio_path), **kwargs)
+    result = pipeline(str(audio_path), **kwargs)
+
+    # pyannote 4.x returns a DiarizeOutput dataclass wrapping the Annotation
+    # (prefer the non-overlapping one for tidy segments); earlier versions
+    # return the Annotation directly and therefore already have itertracks.
+    if hasattr(result, "exclusive_speaker_diarization"):
+        annotation = result.exclusive_speaker_diarization
+    elif hasattr(result, "speaker_diarization"):
+        annotation = result.speaker_diarization
+    else:
+        annotation = result
 
     segments = []
-    for turn, _, speaker in diarization.itertracks(yield_label=True):
+    for turn, _, speaker in annotation.itertracks(yield_label=True):
         segments.append((turn.start, turn.end, speaker))
     return segments
 
@@ -220,6 +230,12 @@ def transcribe_file(
             print("     https://huggingface.co/pyannote/segmentation-3.0")
             print("  3) Pass via --hf-token ... or set HF_TOKEN in your environment.")
             sys.exit(1)
+
+        # Safety net: write plain transcript first so the expensive whisper
+        # run is never wasted if diarization then fails. We'll overwrite
+        # with the diarized version on success.
+        output_path.write_text(result["text"].strip())
+        print(f"  Plain transcript saved as fallback: {output_path}")
 
         speaker_segments = run_diarization(
             audio_path,

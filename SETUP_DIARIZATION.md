@@ -193,6 +193,14 @@ This is the third model pyannote 4.x pulls in behind the scenes. Go to
 https://huggingface.co/pyannote/speaker-diarization-community-1 and click
 **Agree and access repository**, then re-run.
 
+**`'DiarizeOutput' object has no attribute 'itertracks'`**
+pyannote.audio 4.x changed the pipeline return type from a bare
+`Annotation` (which has `.itertracks()`) to a `DiarizeOutput` dataclass that
+*wraps* one. The bundled `transcribe.py` handles both shapes automatically.
+If you're calling pyannote directly, access `result.exclusive_speaker_diarization`
+(non-overlapping) or `result.speaker_diarization` (with overlaps) and call
+`.itertracks(yield_label=True)` on that.
+
 **`Symbol not found: _torch_library_impl`**
 `torch` and `torchaudio` versions are mismatched. Reinstall both together:
 
